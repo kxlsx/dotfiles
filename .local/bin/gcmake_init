@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+# This script is used to copy
+# generic_c_makefile to the current directory.
+#
+# Łukasz Dragon 2025
+
+GENERIC_C_MAKEFILE_URL=https://gist.githubusercontent.com/kxlsx/c29127d75136a832f029aaae1a897213/raw/19d329bda08ca4289f8359821b676705f219fb9a/Makefile
+GENERIC_C_MAKEFILE_DIR=$HOME/.local/share/generic_c_makefile
+
+if [ ! -f $GENERIC_C_MAKEFILE_DIR/Makefile ]; then
+    mkdir -p $GENERIC_C_MAKEFILE_DIR
+    if [ $(curl $GENERIC_C_MAKEFILE_URL --silent -o /dev/null -w "%{http_code}") -ne 200 ]; then
+        printf "gcmake_init: Failed to download Makefile from '%s'\n" $GENERIC_C_MAKEFILE_URL
+        exit 1
+    fi
+
+    curl --fail $GENERIC_C_MAKEFILE_URL -o $GENERIC_C_MAKEFILE_DIR/Makefile
+    printf "gcmake_init: Downloaded: '%s'\n\tinto: '%s/Makefile'\n" $GENERIC_C_MAKEFILE_URL $GENERIC_C_MAKEFILE_DIR
+fi
+
+cp $GENERIC_C_MAKEFILE_DIR/Makefile ./Makefile
+printf "gcmake_init: Copied '%s/Makefile' to './Makefile'\n" $GENERIC_C_MAKEFILE_DIR

@@ -1,0 +1,10 @@
+dotfiles
+========
+
+This repository contains my personal config files & scripts, 
+that I've accumulated over the years.
+The current setup is tailored to the i3 window manager
+with at least two displays (see .xinitrc).
+
+NOTES contains a list of dependencies & useful things
+I decided to write down.

@@ -1,0 +1,190 @@
+# i3 config file (v6)
+#
+# Łukasz Dragon 2022
+
+#=====> DEFINITIONS <=====
+# set mod key
+set $mod Mod4
+
+# define names for default workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# define displays
+set $display0 "DP-1"
+set $display1 "DP-0"
+
+# define vertical-able display
+set $display1_set_vertical "xrandr --output $display1 --rotate left"
+set $display1_set_horizontal "xrandr --output $display0 --rotate normal"
+
+# define programs to launch
+set $terminal "kitty"
+set $prog_launcher "rofi -combi-modi drun -show combi -modi combi -show-icons"
+set $file_explorer "nemo"
+set $browser "firefox"
+set $vscode "codium"
+set $password_manager "keepassxc"
+set $screenshot "flameshot gui"
+
+# define colors
+set $coloract "#6a8e7a"
+set $colorin "#3c5045"
+set_from_resource $white i3wm.color15 "#fefbec"
+set_from_resource $split i3wm.color10 "#9E664B0"
+
+# set wallpaper and theme command 
+# set $wallpaper_path "PATH"
+# set $set_wallpaper "feh --bg-fill $wallpaper_path"
+
+# =====> ON STARTUP <=====
+exec --no-startup-id nm-applet
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# set wallpaper
+exec_always --no-startup-id $set_wallpaper
+
+# autostart stuff
+exec --no-startup-id i3-msg 'workspace 1; exec $terminal; workspace 2; exec $browser'
+
+# =====> LOOKS <=====
+# fonts
+font pango: FiraCode-Light 8
+
+# colors
+# class                 border    backgr    text    indicator child_border
+client.focused          $coloract $coloract $white  $split $coloract
+client.focused_inactive $coloract $coloract $white  $split $coloract
+client.unfocused        $colorin  $colorin  #888888 $split $colorin
+client.urgent           #2f343a   #900000   $white  #900000 #900000
+client.placeholder      #000000   #0c0c0c   $white  #000000 #0c0c0c
+client.background       #ffffff
+
+# window gaps
+# disable window borders for the gaps to work 
+for_window [class="^.*"] border pixel 2
+gaps inner 0
+gaps outer 12
+
+# set size for floating windows
+#floating_maximum_size 760 x 420a
+
+# =====> BAR <=====
+bar {
+    status_command i3status
+}
+
+# =====> BINDINGS <=====
+# programs
+bindsym $mod+Return exec $terminal
+bindsym $mod+d exec $prog_launcher
+bindsym $mod+e exec $file_explorer
+bindsym $mod+b exec $browser
+bindsym $mod+c exec $vscode
+bindsym $mod+p exec $password_manager
+bindsym $mod+Shift+s exec $screenshot
+bindsym Print exec $screenshot
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move between monitors
+bindsym $mod+Control+Shift+Right move workspace to output right
+bindsym $mod+Control+Shift+Left move workspace to output left
+bindsym $mod+Control+Shift+Up move workspace to output up
+bindsym $mod+Control+Shift+Down move workspace to output down
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+q layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+# bindsym $mod+a focus parent
+
+# focus the child container
+# bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# set display to vertical/horizontal
+bindsym $mod+Shift+v exec $display1_set_vertical
+bindsym $mod+Shift+h exec $display1_set_horizontal
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"

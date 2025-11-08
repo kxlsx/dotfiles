@@ -1,0 +1,63 @@
+# ===> DEPENDECIES <===
+# core
+xorg
+vim
+python
+fonts-firacode
+i3
+kitty
+exa
+codium
+calcurse
+rofi
+firefox
+keepassxc
+flameshot
+feh
+https://github.com/dylanaraps/pywal
+https://github.com/deviantfero/wpgtk
+# stuff you probably want
+gimp
+nemo
+mirage
+vlc
+pavucontrol
+wine
+links
+wget
+curl
+cups
+neofetch
+lxappearance
+# coding stuff
+git
+rustup
+nasm
+golang
+default-jre
+default-jdk
+php
+flex
+bison
+clisp
+groff
+awk
+lua
+llvm
+lld
+clang
+mingw-w64
+texlive-full
+
+# ===> DEEP KNOWLEDGE <===
+# make Open in Terminal work in nemo:
+$ gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
+
+# grub resolution stuff
+GRUB_GFX_MODE=1920x1080
+GRUB_GFXPAYLOAD_LINUX=keep
+
+# if you're using Debian, i3gaps is already merged with i3
+
+# don't ever lose this website: 
+https://graphics.stanford.edu/~seander/bithacks.html
