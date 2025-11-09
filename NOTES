@@ -48,6 +48,10 @@ lld
 clang
 mingw-w64
 texlive-full
+ghc
+https://github.com/asdf-vm/asdf
+elixir
+erlang
 
 # ===> DEEP KNOWLEDGE <===
 # make Open in Terminal work in nemo:

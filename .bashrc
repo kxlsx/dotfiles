@@ -18,6 +18,7 @@ export PATH=$PATH:/sbin:/usr/local/bin:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin:$HOME/.cargo/env
 export PATH=$PATH:$HOME/.zig/
 export PATH=$PATH:$HOME/.anaconda3/bin:
+export PATH=$PATH:$HOME/.asdf/shims
 
 export DISPLAY=:0.0
 
